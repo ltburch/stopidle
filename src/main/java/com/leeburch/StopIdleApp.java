@@ -64,7 +64,6 @@ public class StopIdleApp {
 		}
 
 		int period = Integer.parseInt(ns.getString("period"));
-		boolean state = true;
 		int spinPosition = 0;
 
 		Robot robot = null;
@@ -78,7 +77,7 @@ public class StopIdleApp {
 		while (true) {
 			if (robot != null) {
 				if (ns.getBoolean("verbose") == true) {
-					System.out.println("\b" + ns.getString("type") + " lock to: " + state);
+					System.out.println("\b flipping " + ns.getString("type"));
 				}
 				robot.keyPress(lockToToggle);
 				robot.keyPress(lockToToggle);				
@@ -87,8 +86,6 @@ public class StopIdleApp {
 				System.exit(1);
 			}
 			
-
-			state = !state;
 			long toggleTime = System.currentTimeMillis() + period * 1000;
 			while (System.currentTimeMillis() < toggleTime) {
 				try {
